@@ -101,7 +101,7 @@ def run_protocol_demo():
     print_step(1, "Vehicle Login and Verification")
     
     print_message("Vehicle V_i", "Inserting credentials...")
-    print_message("Vehicle V_i", f"VID*: {VID_i}")
+    print_message("Vehicle V_i", f"VID*: {VID_i.hex()}")
     print_message("Vehicle V_i", "VPW*: [PROTECTED]")
     
     print_message("Vehicle V_i", "Computing TV*_i and verifying against smart card...")
@@ -123,7 +123,7 @@ def run_protocol_demo():
     print_data("F_i (masked r'_3)", F_i)
     print_data("T_1 (timestamp)", T_1)
     
-    print_message("Vehicle V_i", f"Sending M1 = {{RID_i, P_i, F_i, T_1}} to Fog Node {FID_j}")
+    print_message("Vehicle V_i", f"Sending M1 = {{RID_i, P_i, F_i, T_1}} to Fog Node {FID_j.hex()}")
     print_success(f"Message M1 transmitted")
     
     # Step 3: F_j -> CS (Message M2)
@@ -162,8 +162,8 @@ def run_protocol_demo():
     print_message("Cloud Server", "Computing authenticator D* and verifying D* == D...")
     print_success("Fog Node and Vehicle authenticated successfully")
     
-    print_message("Cloud Server", "Computing VID_i from R_i...")
-    print_message("Cloud Server", "Computing session key SK = h(VID_i || r_3 || r'_3 || r_4)")
+    print_message("Cloud Server", "Generating random r_5...")
+    print_message("Cloud Server", "Computing session key SK = h(PFD_j || R_i || r_4 || r_5 ⊕ K_cf)")
     print_message("Cloud Server", "Generating challenge components L_i, Z_i...")
     
     print_data("L_i", L_i)
@@ -182,11 +182,11 @@ def run_protocol_demo():
     N_i, J_i, T_4 = fog.generate_m4(L_i, Z_i, T_3)
     
     print_success("Timestamp T_3 is fresh")
-    print_message("Fog Node F_j", "Recovering r'_3 and computing Z*_i...")
+    print_message("Fog Node F_j", "Recovering r_5 and computing SK*...")
+    print_message("Fog Node F_j", "Computing SK* = h(PFD_j || R_i || r_4 || r_5 ⊕ K_cf)")
     print_message("Fog Node F_j", "Verifying Z*_i == Z_i...")
     print_success("Cloud Server authenticated successfully")
     
-    print_message("Fog Node F_j", "Computing session key SK* = h(r'_3 || r_4 || Q_i)")
     print_message("Fog Node F_j", "Generating challenge components N_i, J_i...")
     
     print_data("N_i", N_i)
@@ -205,11 +205,11 @@ def run_protocol_demo():
     vehicle.establish_session_key(N_i, J_i, T_4, FID_j)
     
     print_success("Timestamp T_4 is fresh")
-    print_message("Vehicle V_i", "Computing J*_i = h(RID_i || r'_3 || N_i || T_4)...")
+    print_message("Vehicle V_i", "Computing J*_i = h(RID_i || F_i)...")
     print_message("Vehicle V_i", "Verifying J*_i == J_i...")
     print_success("Fog Node authenticated successfully")
     
-    print_message("Vehicle V_i", "Computing session key SK = h(r'_3 || N_i || Q_i)")
+    print_message("Vehicle V_i", "Computing SK = N_i ⊕ h(FID_j ⊕ Q_i || R_i)")
     print_success("Session key established")
     
     # Final Summary
@@ -220,11 +220,12 @@ def run_protocol_demo():
     print("\nSession Keys:")
     print_data("  Vehicle SK", vehicle.session_key)
     print_data("  Fog Node SK", fog.session_key)
+    print_data("  Cloud Server SK", cs.vehicle_data[VID_i]['session_key'] if VID_i in cs.vehicle_data and 'session_key' in cs.vehicle_data[VID_i] else b'[not stored]')
     
     # Verify session keys match
     print("\nVerifying session key agreement...")
-    if vehicle.session_key == fog.session_key:
-        print("  [+] SUCCESS: Vehicle and Fog Node share the same session key!")
+    if vehicle.session_key == fog.session_key and vehicle.session_key == cs.vehicle_data[VID_i]['session_key']:
+        print("  [+] SUCCESS: Vehicle, Fog Node, and Cloud Server share the same session key!")
     else:
         print("  [-] ERROR: Session keys do not match!")
         print(f"  Vehicle: {vehicle.session_key.hex()[:32]}...")

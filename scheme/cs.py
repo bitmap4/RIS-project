@@ -54,10 +54,18 @@ class CloudServer:
         T_3 = int_to_bytes(int(time.time()), 4)  # 32 bits = 4 bytes
 
         SK = h(PFD_j_star + R_i_star + r_4_star + xor_bytes(r_5, K_cf))
-        
+
+        real_R_i = R_i_star[:8] 
+        # Now we can find the real VID_i
+        VID_i_star = xor_bytes(real_R_i, FID_j)
+
         # Store session key for verification
-        if R_i_star[:8] in self.vehicle_data:
-            self.vehicle_data[R_i_star[:8]]['session_key'] = SK
+        if VID_i_star in self.vehicle_data:
+            self.vehicle_data[VID_i_star]['session_key'] = SK
+        
+        # # Store session key for verification
+        # if R_i_star[:8] in self.vehicle_data:
+        #     self.vehicle_data[R_i_star[:8]]['session_key'] = SK
         
         Z_i = h(SK + xor_bytes(K_cf, pad_to_length(FID_j, 20)))
         L_i = xor_bytes(r_5, h(xor_bytes(K_cf, pad_to_length(FID_j, 20)) + r_4_star))
