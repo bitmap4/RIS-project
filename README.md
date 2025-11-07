@@ -12,7 +12,7 @@ or through uv:
 
 ```bash
 uv sync # install dependencies
-uv run python -m demonstration
+uv run python -m demonstration all
 ```
 This will simulate the interactions between the Vehicle, Fog Node, and Cloud Server, showcasing the registration and authentication phases of the protocol.
 
