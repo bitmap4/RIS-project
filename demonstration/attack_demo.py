@@ -279,12 +279,12 @@ def attack_3_privileged_insider():
     
     # Insider can recover values from M2 using stolen K_cf
     r_4_insider = xor_bytes(W_i, h(insider_K_cf + pad_to_length(FID_j, 20)))
-    PFD_j_insider = xor_bytes(X_i, h(FID_j + insider_K_cf + r_4_insider))
+    PFD_j_insider = xor_bytes(X_i, h(FID_j + xor_bytes(insider_K_cf, r_4_insider)))
     R_i_insider = xor_bytes(Y_i, h(insider_K_cf + r_4_insider))
     
     print_step("Insider recovers r_4 = W_i ⊕ h(K_cf || FID_j)")
     print_attack_detail("  r_4", r_4_insider)
-    print_step("Insider recovers PFD_j = X_i ⊕ h(FID_j || K_cf || r_4)")
+    print_step("Insider recovers PFD_j = X_i ⊕ h(FID_j || (K_cf ⊕ r_4))")
     print_attack_detail("  PFD_j", PFD_j_insider)
     print_step("Insider recovers R_i = Y_i ⊕ h(K_cf || r_4)")
     print_attack_detail("  R_i", R_i_insider)
@@ -303,8 +303,8 @@ def attack_3_privileged_insider():
     
     # Insider can now compute session key
     print("\n  Insider computes session key:")
-    print_step("SK = h(PFD_j || R_i || r_4 || (r_5 ⊕ K_cf))")
-    insider_SK = h(PFD_j_insider + R_i_insider + r_4_insider + xor_bytes(r_5_insider, insider_K_cf))
+    print_step("SK = h(PFD_j || pad(R_i, 20) || r_4 || (r_5 ⊕ K_cf))")
+    insider_SK = h(PFD_j_insider + pad_to_length(R_i_insider, 20) + r_4_insider + xor_bytes(r_5_insider, insider_K_cf))
     print_attack_detail("  Computed SK", insider_SK)
     
     print_attack_success("Insider computed session key!")
