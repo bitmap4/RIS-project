@@ -79,8 +79,8 @@ def print_communication_cost(results: Dict[str, int], cfg):
     print(f"  M3 (CS -> F_j):           {results['M3']} bits ({results['M3']//8} bytes)")
     print(f"  M4 (F_j -> V_i):          {results['M4']} bits ({results['M4']//8} bytes)")
     
-    print(f"\n{'─'*60}")
+    print(f"\n{'-'*60}")
     print(f"  TOTAL:                   {results['total_bits']} bits")
     print(f"                           {results['total_bytes']} bytes")
     print(f"                           {results['total_kb']:.2f} KB")
-    print(f"{'─'*60}\n")
+    print(f"{'-'*60}\n")

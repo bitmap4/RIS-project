@@ -79,6 +79,6 @@ def print_computational_cost(results: Dict[str, float]):
     print(f"  Fog Node (F_j):          {results['fog_node']:.4f} ms")
     print(f"  Cloud Server (CS):       {results['cloud_server']:.4f} ms")
     
-    print(f"\n{'─'*60}")
+    print(f"\n{'-'*60}")
     print(f"  TOTAL COST:              {results['total']:.4f} ms")
-    print(f"{'─'*60}\n")
+    print(f"{'-'*60}\n")

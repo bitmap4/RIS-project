@@ -20,13 +20,13 @@ def print_header(title):
 
 
 def print_scenario(num, title):
-    print(f"\n{'─' * 70}")
+    print(f"\n{'-' * 70}")
     print(f"ATTACK {num}: {title}")
-    print('─' * 70)
+    print('-' * 70)
 
 
 def print_step(description):
-    print(f"  • {description}")
+    print(f"  - {description}")
 
 
 def print_attack_success(message):
@@ -49,7 +49,7 @@ def attack_1_vehicle_impersonation():
     """
     print_scenario(1, "Vehicle Impersonation Attack (No Authentication)")
     
-    print("\n📋 Background:")
+    print("\nBackground:")
     print("  The vehicle V_i only checks TV_i* == TV_i locally.")
     print("  The secret a_i is never used in messages to F_j or CS.")
     print("  The protocol proceeds without V_i proving its identity.")
@@ -120,10 +120,10 @@ def attack_1_vehicle_impersonation():
         print(f"  [-] Cloud Server believes attacker is legitimate victim")
         print(f"  [-] Session key shared with attacker: {fog.session_key.hex()[:32]}...")
         
-        print("\n💡 Root Cause:")
-        print("  • Vehicle never proves knowledge of password or a_i")
-        print("  • Only local check TV_i* == TV_i (bypassed by attacker)")
-        print("  • Message M1 contains no authenticator tied to vehicle's secrets")
+        print("\nRoot Cause:")
+        print("  - Vehicle never proves knowledge of password or a_i")
+        print("  - Only local check TV_i* == TV_i (bypassed by attacker)")
+        print("  - Message M1 contains no authenticator tied to vehicle's secrets")
         
         return True
         
@@ -139,7 +139,7 @@ def attack_2_offline_password_guessing():
     """
     print_scenario(2, "Off-Line Password Guessing Attack (Smart Card Stolen)")
     
-    print("\n📋 Background:")
+    print("\nBackground:")
     print("  The smart card stores {TV_i, MV_i, r_1}.")
     print("  TV_i = h(VID_i ⊕ VPW_i || a_i) acts as a verifiable equation.")
     print("  All components needed for verification are on the card.")
@@ -203,11 +203,11 @@ def attack_2_offline_password_guessing():
             print(f"\n  [-] Recovered VID: {VID_victim.hex()}")
             print(f"  [-] Recovered Password: {guess_pwd.decode()}")
             
-            print("\n💡 Root Cause:")
-            print("  • Smart card stores all verification data")
-            print("  • No rate limiting on password attempts")
-            print("  • TV_i = h(VID_i ⊕ VPW_i || a_i) is directly verifiable")
-            print("  • Attacker can test unlimited passwords offline")
+            print("\nRoot Cause:")
+            print("  - Smart card stores all verification data")
+            print("  - No rate limiting on password attempts")
+            print("  - TV_i = h(VID_i ⊕ VPW_i || a_i) is directly verifiable")
+            print("  - Attacker can test unlimited passwords offline")
             
             return True
         else:
@@ -224,7 +224,7 @@ def attack_3_privileged_insider():
     """
     print_scenario(3, "Privileged Insider Attack (Cloud Server Key Escrow)")
     
-    print("\n📋 Background:")
+    print("\nBackground:")
     print("  The CS generates fog node private key: b_j = h(PFD_j || K_c)")
     print("  The CS has complete key escrow - knows all fog node secrets.")
     print("  No separation of trust between CS and fog nodes.")
@@ -332,11 +332,11 @@ def attack_3_privileged_insider():
     if insider_SK == fog.session_key:
         print(f"  [-] KEYS MATCH - Insider can decrypt all communications!")
         
-        print("\n💡 Root Cause:")
-        print("  • CS generates all fog node private keys")
-        print("  • No forward secrecy or key separation")
-        print("  • Single point of trust failure")
-        print("  • Complete key escrow by cloud server")
+        print("\nRoot Cause:")
+        print("  - CS generates all fog node private keys")
+        print("  - No forward secrecy or key separation")
+        print("  - Single point of trust failure")
+        print("  - Complete key escrow by cloud server")
         
         return True
     
@@ -350,7 +350,7 @@ def attack_4_fog_node_impersonation():
     """
     print_scenario(4, "Fog Node Impersonation Attack (Flawed Authentication)")
     
-    print("\n📋 Background:")
+    print("\nBackground:")
     print("  V_i checks: J_i == h(RID_i || r'_3 ⊕ Q_i)")
     print("  But RID_i and F_i = r'_3 ⊕ Q_i were both sent BY V_i in M1!")
     print("  This only proves the recipient read M1, not that it has b_j.")
@@ -418,11 +418,11 @@ def attack_4_fog_node_impersonation():
             print(f"  [-] Attacker sent J_i:     {J_i_fake.hex()[:32]}...")
             print(f"  [-] J_i* == J_i: Vehicle is convinced!")
             
-            print("\n💡 Root Cause:")
-            print("  • Authentication check uses values vehicle sent itself")
-            print("  • J_i = h(RID_i || F_i) requires no secrets from fog node")
-            print("  • Attacker just echoes received data in hash")
-            print("  • No proof that fog node possesses private key b_j")
+            print("\nRoot Cause:")
+            print("  - Authentication check uses values vehicle sent itself")
+            print("  - J_i = h(RID_i || F_i) requires no secrets from fog node")
+            print("  - Attacker just echoes received data in hash")
+            print("  - No proof that fog node possesses private key b_j")
             
             return True
         else:

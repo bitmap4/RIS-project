@@ -21,9 +21,9 @@ def print_header(title):
 
 
 def print_scenario(num, title):
-    print(f"\n{'─' * 70}")
+    print(f"\n{'-' * 70}")
     print(f"Scenario {num}: {title}")
-    print('─' * 70)
+    print('-' * 70)
 
 
 def print_attack(description):
