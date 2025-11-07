@@ -1,0 +1,5 @@
+# Benchmark configuration
+iterations: 10  # Number of times to run each benchmark
+
+# Data sizes for benchmarking
+data_size: 32  # bytes for hash input

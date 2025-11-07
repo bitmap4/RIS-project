@@ -1,0 +1,103 @@
+{
+  "device": {
+    "name": "Lenovo-M715E",
+    "type": "fog_node",
+    "specs": {
+      "cpu": "Pentium E5500",
+      "ram": "512MB",
+      "os": "Windows 10"
+    }
+  },
+  "benchmarks": {
+    "T_h": 1.4597150002373382,
+    "T_pa": 0.05040239921072498,
+    "T_ed": 0.06422709993785247,
+    "T_sm": 120.92848159809364,
+    "T_bp": 260.47449709876673
+  },
+  "computational_cost": {
+    "vehicle_ms": 250.6152531976113,
+    "fog_node_ms": 136.98534660070436,
+    "cloud_server_ms": 257.913828198798,
+    "total_ms": 645.5144279971137,
+    "breakdown": {
+      "T_h": 1.4597150002373382,
+      "T_sm": 120.92848159809364,
+      "total_hash_ops": 28,
+      "total_scalar_mult_ops": 5
+    }
+  },
+  "communication_cost": {
+    "M1_bits": 672,
+    "M2_bits": 672,
+    "M3_bits": 352,
+    "M4_bits": 352,
+    "total_bits": 2048,
+    "total_bytes": 256,
+    "total_kb": 0.25
+  },
+  "configuration": {
+    "benchmark": {
+      "iterations": 10,
+      "data_size": 32
+    },
+    "evaluation": {
+      "computational_cost": {
+        "vehicle": {
+          "hash": 6,
+          "scalar_mult": 2
+        },
+        "fog_node": {
+          "hash": 11,
+          "scalar_mult": 1
+        },
+        "cloud_server": {
+          "hash": 11,
+          "scalar_mult": 2
+        }
+      },
+      "communication_cost": {
+        "hash_output": 160,
+        "random_number": 160,
+        "ec_point": 320,
+        "identifier": 64,
+        "timestamp": 32,
+        "messages": {
+          "M1": [
+            "random_number",
+            "ec_point",
+            "random_number",
+            "timestamp"
+          ],
+          "M2": [
+            "random_number",
+            "hash_output",
+            "random_number",
+            "hash_output",
+            "timestamp"
+          ],
+          "M3": [
+            "random_number",
+            "hash_output",
+            "timestamp"
+          ],
+          "M4": [
+            "hash_output",
+            "hash_output",
+            "timestamp"
+          ]
+        }
+      }
+    },
+    "device": {
+      "name": "Lenovo-M715E",
+      "type": "fog_node",
+      "specs": {
+        "cpu": "Pentium E5500",
+        "ram": "512MB",
+        "os": "Windows 10"
+      }
+    },
+    "output_dir": "simulations/outputs"
+  }
+}

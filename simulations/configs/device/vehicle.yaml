@@ -1,0 +1,7 @@
+# Vehicle device configuration (MEIZU-MX5)
+name: "MEIZU-MX5"
+type: "vehicle"
+specs:
+  cpu: "Helio X10 Turbo"
+  ram: "512MB"
+  os: "Flyme 6.3.5.0A"

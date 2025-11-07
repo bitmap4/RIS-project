@@ -1,0 +1,7 @@
+# Cloud Server device configuration (MSI-GP63)
+name: "MSI-GP63"
+type: "cloud_server"
+specs:
+  cpu: "Intel i7-8750H"
+  ram: "1GB"
+  os: "Windows 10"

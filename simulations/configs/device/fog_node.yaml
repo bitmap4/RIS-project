@@ -1,0 +1,7 @@
+# Fog Node device configuration (Lenovo-M715E)
+name: "Lenovo-M715E"
+type: "fog_node"
+specs:
+  cpu: "Pentium E5500"
+  ram: "512MB"
+  os: "Windows 10"

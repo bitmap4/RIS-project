@@ -1,0 +1,20 @@
+# Dockerfile for simulating Cloud Server (MSI-GP63 notebook)
+# Intel i7-8750H CPU, 24G RAM
+
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1
+ENV MACHINE_TYPE=cloud_server
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY scheme/ ./scheme/
+COPY evaluation/ ./evaluation/
+
+RUN chmod +x /app/evaluation/docker/entrypoint.sh && \
+    mkdir -p /app/evaluation/results && \
+    chmod 777 /app/evaluation/results
+
+CMD ["/app/evaluation/docker/entrypoint.sh"]

@@ -1,0 +1,20 @@
+# Dockerfile for simulating Vehicle (MEIZU-MX5 phone)
+# Helio X10 Turbo CPU, 3G RAM
+
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1
+ENV MACHINE_TYPE=vehicle
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY scheme/ ./scheme/
+COPY evaluation/ ./evaluation/
+
+RUN chmod +x /app/evaluation/docker/entrypoint.sh && \
+    mkdir -p /app/evaluation/results && \
+    chmod 777 /app/evaluation/results
+
+CMD ["/app/evaluation/docker/entrypoint.sh"]

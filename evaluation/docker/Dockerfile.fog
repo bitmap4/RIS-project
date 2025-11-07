@@ -1,0 +1,20 @@
+# Dockerfile for simulating Fog Node (Lenovo-M715E desktop)
+# Pentium E5500 CPU, 2G RAM
+
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1
+ENV MACHINE_TYPE=fog_node
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY scheme/ ./scheme/
+COPY evaluation/ ./evaluation/
+
+RUN chmod +x /app/evaluation/docker/entrypoint.sh && \
+    mkdir -p /app/evaluation/results && \
+    chmod 777 /app/evaluation/results
+
+CMD ["/app/evaluation/docker/entrypoint.sh"]

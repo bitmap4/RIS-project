@@ -1,0 +1,8 @@
+defaults:
+  - benchmark: default
+  - evaluation: default
+  - device: vehicle
+  - _self_
+
+# Output directory for results
+output_dir: simulations/results

@@ -1,0 +1,43 @@
+# Evaluation configuration
+
+# Computational cost - operation counts per entity during authentication phase
+computational_cost:
+  vehicle:
+    hash: 6
+    scalar_mult: 2
+  fog_node:
+    hash: 11
+    scalar_mult: 1
+  cloud_server:
+    hash: 11
+    scalar_mult: 2
+
+# Communication cost - bit sizes
+communication_cost:
+  hash_output: 160      # bits
+  random_number: 160    # bits
+  ec_point: 320         # bits
+  identifier: 64        # bits
+  timestamp: 32         # bits
+  
+  # Message composition
+  messages:
+    M1:  # {RID_i, P_i, F_i, T_1}
+      - random_number   # RID_i
+      - ec_point        # P_i
+      - random_number   # F_i
+      - timestamp       # T_1
+    M2:  # {W_i, X_i, Y_i, D, T_2}
+      - random_number   # W_i
+      - hash_output     # X_i
+      - random_number   # Y_i
+      - hash_output     # D
+      - timestamp       # T_2
+    M3:  # {L_i, Z_i, T_3}
+      - random_number   # L_i
+      - hash_output     # Z_i
+      - timestamp       # T_3
+    M4:  # {N_i, J_i, T_4}
+      - hash_output     # N_i
+      - hash_output     # J_i
+      - timestamp       # T_4

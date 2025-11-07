@@ -1,0 +1,28 @@
+# Visualization configuration
+animation:
+  duration: 2000  # Duration per frame in milliseconds
+  dpi: 150        # Resolution
+  loop: 0         # 0 = infinite loop
+
+# Layout configuration
+layout:
+  fig_width: 14
+  fig_height: 10
+  entity_width: 2.5
+  entity_height: 1.5
+  
+  # Entity positions (x, y)
+  vehicle_pos: [2.5, 7]
+  fog_pos: [7, 7]
+  cloud_pos: [11.5, 7]
+
+# Colors
+colors:
+  vehicle: '#4A90E2'
+  fog: '#7ED321'
+  cloud: '#F5A623'
+  arrow: '#D0021B'
+  text: '#333333'
+  background: '#F8F8F8'
+
+output_dir: outputs

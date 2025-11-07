@@ -1,0 +1,58 @@
+services:
+  # Vehicle - MEIZU-MX5 simulation (low-end mobile device)
+  vehicle:
+    build:
+      context: ../..
+      dockerfile: simulations/docker/Dockerfile
+    container_name: ris_vehicle
+    environment:
+      - DEVICE_TYPE=vehicle
+    volumes:
+      - ../../simulations:/app/simulations
+      - ../../scheme:/app/scheme
+      - ./outputs:/app/outputs
+    command: python -m simulations.run_simulation device=vehicle
+    cpus: 0.1
+    mem_limit: 512m
+    networks:
+      - ris_network
+
+  # Fog Node - Lenovo-M715E simulation (mid-range desktop)
+  fog_node:
+    build:
+      context: ../..
+      dockerfile: simulations/docker/Dockerfile
+    container_name: ris_fog_node
+    environment:
+      - DEVICE_TYPE=fog_node
+    volumes:
+      - ../../simulations:/app/simulations
+      - ../../scheme:/app/scheme
+      - ./outputs:/app/outputs
+    command: python -m simulations.run_simulation device=fog_node
+    cpus: 0.2
+    mem_limit: 512m
+    networks:
+      - ris_network
+
+  # Cloud Server - MSI-GP63 simulation (high-end laptop)
+  cloud_server:
+    build:
+      context: ../..
+      dockerfile: simulations/docker/Dockerfile
+    container_name: ris_cloud_server
+    environment:
+      - DEVICE_TYPE=cloud_server
+    volumes:
+      - ../../simulations:/app/simulations
+      - ../../scheme:/app/scheme
+      - ./outputs:/app/outputs
+    command: python -m simulations.run_simulation device=cloud_server
+    cpus: 0.4
+    mem_limit: 1g
+    networks:
+      - ris_network
+
+networks:
+  ris_network:
+    driver: bridge
