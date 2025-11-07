@@ -1,6 +1,3 @@
-"""
-Benchmark atomic cryptographic operations.
-"""
 import time
 import secrets
 from typing import Dict
@@ -21,7 +18,7 @@ class CryptoBenchmark:
         self.order = self.curve.field.n
         
     def benchmark_hash(self) -> float:
-        """Benchmark hash function (SHA-256)."""
+        
         times = []
         data = secrets.token_bytes(self.data_size)
         
@@ -36,7 +33,7 @@ class CryptoBenchmark:
         return statistics.mean(times)
     
     def benchmark_point_addition(self) -> float:
-        """Benchmark elliptic curve point addition."""
+        
         times = []
         # Generate two random points
         k1 = secrets.randbelow(self.order)
@@ -53,7 +50,7 @@ class CryptoBenchmark:
         return statistics.mean(times)
     
     def benchmark_symmetric_encryption(self) -> float:
-        """Benchmark symmetric encryption/decryption (AES-256)."""
+        
         times = []
         key = secrets.token_bytes(32)  # 256-bit key
         data = secrets.token_bytes(self.data_size)
@@ -80,7 +77,7 @@ class CryptoBenchmark:
         return statistics.mean(times)
     
     def benchmark_scalar_multiplication(self) -> float:
-        """Benchmark elliptic curve scalar multiplication."""
+        
         times = []
         k = secrets.randbelow(self.order)
         
@@ -93,11 +90,6 @@ class CryptoBenchmark:
         return statistics.mean(times)
     
     def benchmark_bilinear_pairing(self) -> float:
-        """
-        Benchmark bilinear pairing.
-        Note: This is a placeholder as bilinear pairing is not used in the scheme.
-        We simulate it with a more expensive operation (multiple scalar multiplications).
-        """
         times = []
         k1 = secrets.randbelow(self.order)
         k2 = secrets.randbelow(self.order)
@@ -114,7 +106,7 @@ class CryptoBenchmark:
         return statistics.mean(times)
     
     def run_all_benchmarks(self) -> Dict[str, float]:
-        """Run all benchmarks and return results."""
+        
         print(f"Running benchmarks with {self.iterations} iterations...")
         
         results = {
@@ -129,7 +121,7 @@ class CryptoBenchmark:
 
 
 def run_benchmarks(cfg) -> Dict[str, float]:
-    """Run benchmarks with given configuration."""
+    
     benchmark = CryptoBenchmark(
         iterations=cfg.benchmark.iterations,
         data_size=cfg.benchmark.data_size

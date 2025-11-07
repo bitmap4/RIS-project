@@ -1,6 +1,3 @@
-"""
-Generate animated GIF visualization of the mutual authentication protocol.
-"""
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
@@ -37,7 +34,7 @@ class ProtocolVisualizer:
         self.cloud_pos = tuple(cfg.layout.cloud_pos)
         
     def create_frame(self, frame_data: dict) -> plt.Figure:
-        """Create a single frame of the animation."""
+        
         fig, ax = plt.subplots(
             figsize=(self.fig_width, self.fig_height),
             dpi=self.cfg.animation.dpi
@@ -76,7 +73,7 @@ class ProtocolVisualizer:
         return fig
     
     def _draw_entity(self, ax, pos, label, color):
-        """Draw an entity box."""
+        
         rect = FancyBboxPatch(
             (pos[0] - self.entity_width/2, pos[1] - self.entity_height/2),
             self.entity_width, self.entity_height,
@@ -88,7 +85,7 @@ class ProtocolVisualizer:
                fontsize=10, fontweight='bold', color=self.text_color)
     
     def _draw_action(self, ax, action):
-        """Draw an action text at entity."""
+        
         entity = action['entity']
         text = action['text']
         
@@ -102,7 +99,7 @@ class ProtocolVisualizer:
                wrap=True)
     
     def _draw_arrow(self, ax, arrow):
-        """Draw an arrow between entities."""
+        
         from_entity = arrow['from']
         to_entity = arrow['to']
         label = arrow['label']
@@ -133,7 +130,7 @@ class ProtocolVisualizer:
                fontsize=10, fontweight='bold', color=self.arrow_color)
     
     def _draw_check(self, ax, check):
-        """Draw a checkmark at entity."""
+        
         entity = check['entity']
         text = check['text']
         
@@ -147,7 +144,7 @@ class ProtocolVisualizer:
                fontsize=7, bbox=dict(boxstyle='round,pad=0.3', facecolor='lightgreen', alpha=0.8))
     
     def _draw_key(self, ax, key):
-        """Draw a key icon at entity."""
+        
         entity = key['entity']
         
         pos_map = {'vehicle': self.vehicle_pos, 'fog': self.fog_pos, 'cloud': self.cloud_pos}
@@ -160,7 +157,7 @@ class ProtocolVisualizer:
                fontsize=8, fontweight='bold', color='black')
     
     def generate_frames(self) -> list:
-        """Generate all frames for the animation."""
+        
         frames_data = [
             # Frame 1: V_i Login
             {
@@ -250,7 +247,7 @@ class ProtocolVisualizer:
         return frames_data
     
     def create_gif(self):
-        """Create the animated GIF."""
+        
         print("Generating protocol visualization frames...")
         
         frames_data = self.generate_frames()
@@ -294,7 +291,7 @@ class ProtocolVisualizer:
 
 @hydra.main(version_base=None, config_path="configs", config_name="config")
 def main(cfg: DictConfig):
-    """Main entry point."""
+    
     visualizer = ProtocolVisualizer(cfg)
     visualizer.create_gif()
 

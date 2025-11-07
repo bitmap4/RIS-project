@@ -1,8 +1,3 @@
-"""
-Demonstration 2: Security Analysis
-Shows the protocol handling various attack scenarios.
-"""
-
 import sys
 import time
 import secrets
@@ -36,8 +31,6 @@ def print_result(success, message):
 
 
 def run_security_demo():
-    """Demonstrate protocol security against various attacks."""
-    
     print_header("SECURITY DEMONSTRATION: Attack Resistance")
     print("\nThis demonstration shows how the protocol handles:")
     print("  1. [+] Successful authentication (baseline)")

@@ -1,13 +1,10 @@
-"""
-Aggregate benchmark results from all devices.
-"""
 import json
 from pathlib import Path
 from typing import Dict, List
 
 
 def load_device_results(output_dir: Path) -> Dict[str, dict]:
-    """Load results from all device simulations."""
+    
     results = {}
     
     for device_type in ['vehicle', 'fog_node', 'cloud_server']:
@@ -20,12 +17,6 @@ def load_device_results(output_dir: Path) -> Dict[str, dict]:
 
 
 def aggregate_results(output_dir: Path = Path("outputs")) -> dict:
-    """
-    Aggregate results from all devices.
-    
-    Returns:
-        Dictionary with aggregated results
-    """
     device_results = load_device_results(output_dir)
     
     if not device_results:
@@ -71,7 +62,7 @@ def aggregate_results(output_dir: Path = Path("outputs")) -> dict:
 
 
 def print_aggregate_results(results: dict):
-    """Print aggregated results."""
+    
     print("\n" + "="*60)
     print("AGGREGATED SIMULATION RESULTS")
     print("="*60)
@@ -97,7 +88,7 @@ def print_aggregate_results(results: dict):
 
 
 def main():
-    """Main entry point for aggregation."""
+    
     output_dir = Path("outputs")
     
     if not output_dir.exists():

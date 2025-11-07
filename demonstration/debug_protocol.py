@@ -1,7 +1,3 @@
-"""
-Debug version of protocol demo to trace the authentication failure.
-"""
-
 import sys
 from pathlib import Path
 

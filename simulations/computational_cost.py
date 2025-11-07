@@ -1,20 +1,7 @@
-"""
-Calculate computational costs for the authentication phase.
-"""
 from typing import Dict
 
 
 def calculate_computational_cost(benchmark_results: Dict[str, float], cfg) -> Dict[str, float]:
-    """
-    Calculate computational cost for each entity and total.
-    
-    Args:
-        benchmark_results: Dictionary with benchmark times (T_h, T_pa, T_ed, T_sm, T_bp)
-        cfg: Hydra configuration
-        
-    Returns:
-        Dictionary with costs for each entity and total
-    """
     T_h = benchmark_results['T_h']
     T_sm = benchmark_results['T_sm']
     
@@ -61,7 +48,7 @@ def calculate_computational_cost(benchmark_results: Dict[str, float], cfg) -> Di
 
 
 def print_computational_cost(results: Dict[str, float]):
-    """Print computational cost results in a formatted way."""
+    
     print("\n" + "="*60)
     print("COMPUTATIONAL COST ANALYSIS")
     print("="*60)

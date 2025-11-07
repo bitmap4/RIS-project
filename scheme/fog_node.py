@@ -20,7 +20,7 @@ class FogNode:
         self.r_3_prime = None
 
     def register(self, cs):
-        """Phase 3: F_j Registration"""
+        
         PFD_j, b_j, K_cf, B_j = cs.register_fog_node(self.FID_j)
         
         self.PFD_j = PFD_j
@@ -36,12 +36,12 @@ class FogNode:
         self.storage['B_j'] = B_j # Public key
 
     def _recover_secrets(self):
-        """Recovers b_j and K_cf from storage."""
+        
         self.K_cf = xor_bytes(self.storage['RK_cf'], pad_to_length(self.FID_j, 20))
         self.b_j = xor_bytes(self.storage['Rb_j'], h(self.FID_j + self.K_cf))
 
     def generate_m2(self, RID_i, P_i, F_i, T_1):
-        """Phase 4, Step 3: F_j -> CS (Message M2)"""
+        
         if abs(int(time.time()) - bytes_to_int(T_1)) > DELTA_T:
             raise ValueError("F_j: T1 is not fresh. Aborting.")
 
@@ -63,7 +63,7 @@ class FogNode:
         return W_i, X_i, Y_i, D, T_2
 
     def generate_m4(self, L_i, Z_i, T_3):
-        """Phase 4, Step 5: F_j -> V_i (Message M4)"""
+        
         if abs(int(time.time()) - bytes_to_int(T_3)) > DELTA_T:
             raise ValueError("F_j: T3 is not fresh. Aborting.")
 

@@ -1,8 +1,3 @@
-"""
-Demonstration of Critical Security Flaws
-Shows successful attacks that exploit vulnerabilities in the scheme.
-"""
-
 import sys
 import secrets
 from pathlib import Path
@@ -42,11 +37,6 @@ def print_attack_detail(label, value):
 
 
 def attack_1_vehicle_impersonation():
-    """
-    Attack 1: Vehicle Impersonation Attack
-    The vehicle only authenticates locally. An attacker can impersonate any vehicle
-    without knowing its password or having its smart card.
-    """
     print_scenario(1, "Vehicle Impersonation Attack (No Authentication)")
     
     print("\nBackground:")
@@ -133,10 +123,6 @@ def attack_1_vehicle_impersonation():
 
 
 def attack_2_offline_password_guessing():
-    """
-    Attack 2: Off-Line Password Guessing Attack
-    All values needed to verify a password guess are stored on the smart card.
-    """
     print_scenario(2, "Off-Line Password Guessing Attack (Smart Card Stolen)")
     
     print("\nBackground:")
@@ -218,10 +204,6 @@ def attack_2_offline_password_guessing():
 
 
 def attack_3_privileged_insider():
-    """
-    Attack 3: Privileged Insider Attack (Cloud Server)
-    CS generates and knows all fog node private keys - complete key escrow.
-    """
     print_scenario(3, "Privileged Insider Attack (Cloud Server Key Escrow)")
     
     print("\nBackground:")
@@ -344,10 +326,6 @@ def attack_3_privileged_insider():
 
 
 def attack_4_fog_node_impersonation():
-    """
-    Attack 4: Flawed Fog Node Authentication
-    Vehicle's only check uses values it sent itself - doesn't verify fog node secrets.
-    """
     print_scenario(4, "Fog Node Impersonation Attack (Flawed Authentication)")
     
     print("\nBackground:")
@@ -435,8 +413,6 @@ def attack_4_fog_node_impersonation():
 
 
 def run_attack_demos():
-    """Run all attack demonstrations."""
-    
     print_header("CRITICAL SECURITY FLAWS DEMONSTRATION")
     print("\nThis demonstrates SUCCESSFUL attacks exploiting vulnerabilities.")
     print("Each attack shows the scheme is NOT SECURE against these threats.")

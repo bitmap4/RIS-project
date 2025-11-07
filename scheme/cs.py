@@ -8,7 +8,7 @@ class CloudServer:
         self.fog_node_data = {}
 
     def register_vehicle(self, VID_i, PV_i):
-        """Phase 2: V_i Registration"""
+        
         a_i_int = bytes_to_int(h(VID_i + PV_i + self.K_c))
         # A_i = a_i_int * G  # This is never used, as per instructions
         MV_i = xor_bytes(int_to_bytes(a_i_int), PV_i)
@@ -19,7 +19,7 @@ class CloudServer:
         return MV_i
 
     def register_fog_node(self, FID_j):
-        """Phase 3: F_j Registration"""
+        
         r_2 = random_nonce()
         PFD_j = h(FID_j + r_2)
         b_j_int = bytes_to_int(h(PFD_j + self.K_c))
@@ -31,7 +31,7 @@ class CloudServer:
         return PFD_j, int_to_bytes(b_j_int), K_cf, B_j
 
     def handle_m2(self, W_i, X_i, Y_i, D, T_2, FID_j):
-        """Phase 4, Step 4: CS receives M2 and generates M3"""
+        
         if abs(int(time.time()) - bytes_to_int(T_2)) > DELTA_T:
             raise ValueError("CS: T2 is not fresh. Aborting.")
 

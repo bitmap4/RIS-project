@@ -1,33 +1,11 @@
-"""
-Calculate communication costs for the authentication phase.
-"""
 from typing import Dict, List
 
 
 def calculate_message_size(message_components: List[str], bit_sizes: Dict[str, int]) -> int:
-    """
-    Calculate the size of a message in bits.
-    
-    Args:
-        message_components: List of component types in the message
-        bit_sizes: Dictionary mapping component types to their sizes in bits
-        
-    Returns:
-        Total message size in bits
-    """
     return sum(bit_sizes[component] for component in message_components)
 
 
 def calculate_communication_cost(cfg) -> Dict[str, int]:
-    """
-    Calculate communication cost for all messages.
-    
-    Args:
-        cfg: Hydra configuration
-        
-    Returns:
-        Dictionary with message sizes and total cost
-    """
     comm_cfg = cfg.evaluation.communication_cost
     
     # Extract bit sizes
@@ -59,7 +37,7 @@ def calculate_communication_cost(cfg) -> Dict[str, int]:
 
 
 def print_communication_cost(results: Dict[str, int], cfg):
-    """Print communication cost results in a formatted way."""
+    
     print("\n" + "="*60)
     print("COMMUNICATION COST ANALYSIS")
     print("="*60)

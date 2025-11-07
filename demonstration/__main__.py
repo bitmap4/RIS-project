@@ -1,9 +1,3 @@
-"""
-Main entry point for demonstrations.
-Run with: python -m demonstration <mode>
-Modes: protocol, security, attacks, all
-"""
-
 import sys
 from .protocol_demo import run_protocol_demo
 from .security_demo import run_security_demo

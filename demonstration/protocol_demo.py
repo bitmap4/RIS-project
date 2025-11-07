@@ -1,8 +1,3 @@
-"""
-Demonstration 1: End-to-End Protocol Execution
-Shows the complete authentication flow with all messages and verifications.
-"""
-
 import sys
 import time
 from pathlib import Path
@@ -41,8 +36,6 @@ def print_data(label, value):
 
 
 def run_protocol_demo():
-    """Run complete end-to-end protocol demonstration."""
-    
     print_header("PROTOCOL DEMONSTRATION: Mutual Authentication")
     print("\nThis demonstration shows the complete authentication flow")
     print("between a Vehicle (V_i), Fog Node (F_j), and Cloud Server (CS).")

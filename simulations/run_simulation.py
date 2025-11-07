@@ -1,6 +1,3 @@
-"""
-Main simulation runner for performance evaluation.
-"""
 import hydra
 from omegaconf import DictConfig, OmegaConf
 import json
@@ -14,12 +11,6 @@ from simulations.communication_cost import calculate_communication_cost, print_c
 
 @hydra.main(version_base=None, config_path="configs", config_name="config")
 def main(cfg: DictConfig):
-    """
-    Main simulation entry point.
-    
-    Args:
-        cfg: Hydra configuration
-    """
     device_name = cfg.device.name
     device_type = cfg.device.type
     

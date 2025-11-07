@@ -20,7 +20,7 @@ class Vehicle:
         self.RID_i = None
 
     def register(self, cs):
-        """Phase 2: V_i Registration"""
+        
         PV_i = h(self.VID_i + self.VPW_i + self.r_1)
         MV_i = cs.register_vehicle(self.VID_i, PV_i)
         
@@ -32,7 +32,7 @@ class Vehicle:
         self.smart_card['r_1'] = self.r_1
 
     def login_and_verify(self, VID_i_star, VPW_i_star):
-        """Phase 4, Step 1: V_i Login and Verification"""
+        
         if 'r_1' not in self.smart_card or 'MV_i' not in self.smart_card:
             raise ValueError("Vehicle not registered.")
 
@@ -46,7 +46,7 @@ class Vehicle:
         return a_i
 
     def generate_m1(self, FID_j, B_j):
-        """Phase 4, Step 2: V_i -> F_j (Message M1)"""
+        
         self.r_3 = secrets.randbelow(ORDER)
         self.r_3_prime = random_nonce()  # 20 bytes
         T_1 = int_to_bytes(int(time.time()), 4)  # 32 bits = 4 bytes
@@ -61,7 +61,7 @@ class Vehicle:
         return self.RID_i, P_i, F_i, T_1
 
     def establish_session_key(self, N_i, J_i, T_4, FID_j):
-        """Phase 4, Step 6: V_i Session Key Establishment"""
+        
         if abs(int(time.time()) - bytes_to_int(T_4)) > DELTA_T:
             raise ValueError("V_i: T4 is not fresh. Aborting.")
         
