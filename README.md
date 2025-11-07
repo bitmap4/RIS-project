@@ -48,4 +48,4 @@ uv run protocol_animation.py
 
 ## Scheme code
 
-The core scheme implementation is located in the `scheme` directory, containing modules for the Cloud Server (`cs.py`), Fog Node (`fog_node.py`), and Vehicle (`vehicle.py`). Each module implements the respective functionalities as per the protocol.
+The core scheme implementation is located in the `scheme` directory, containing modules for the Cloud Server (`cs.py`), Fog Node (`fog_node.py`), and Vehicle (`vehicle.py`). Each module implements the respective functionalities as per the protocol, with certain necessary fixes.
