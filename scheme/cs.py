@@ -42,7 +42,7 @@ class CloudServer:
         K_cf = self.fog_node_data[FID_j]['K_cf']
         
         r_4_star = xor_bytes(W_i, h(K_cf + pad_to_length(FID_j, 20)))
-        PFD_j_star = xor_bytes(X_i, h(FID_j + K_cf + r_4_star))
+        PFD_j_star = xor_bytes(X_i, h(FID_j + xor_bytes(K_cf, r_4_star)))
         R_i_star = xor_bytes(Y_i, h(K_cf + r_4_star))
         
         D_star = h(PFD_j_star + r_4_star + xor_bytes(R_i_star, K_cf))

@@ -56,7 +56,7 @@ class FogNode:
         T_2 = int_to_bytes(int(time.time()), 4)  # 32 bits = 4 bytes
 
         W_i = xor_bytes(self.r_4, h(self.K_cf + pad_to_length(self.FID_j, 20)))
-        X_i = xor_bytes(self.storage['PFD_j'], h(self.FID_j + self.K_cf + self.r_4))
+        X_i = xor_bytes(self.storage['PFD_j'], h(self.FID_j + xor_bytes(self.K_cf, self.r_4)))
         Y_i = xor_bytes(pad_to_length(self.R_i, 20), h(self.K_cf + self.r_4))  # Pad R_i to 20 bytes
         D = h(self.storage['PFD_j'] + self.r_4 + xor_bytes(pad_to_length(self.R_i, 20), self.K_cf))  # Pad R_i to 20 bytes
 
